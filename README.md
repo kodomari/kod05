@@ -1,12 +1,10 @@
-# Kod-04
+# Kod-05
 
 Split Wireless keyboard with trackpoint (SK8707-01)
 
-Based on Auto-KDK design
-
 ## Features
 
-- 80 keys (40 per side)
+- about 60 keys (30 per side)
 - SK8707-01 Trackpoint on right side
 - Rotary encoder on left side
 - Cursor keys on left side
@@ -30,4 +28,4 @@ Based on Auto-KDK design
 
 ## Based on
 
-Template: [kod-kb-akdk-r03_with_trackball](https://github.com/kodomari/kod-kb-akdk-r03_with_trackball)
+Template: [kod-04](https://github.com/kodomari/kod-04)
