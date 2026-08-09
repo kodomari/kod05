@@ -1,5 +1,5 @@
 include:
   - board: xiao_ble//zmk
-    shield: kod_04_left
+    shield: kod_05_left
   - board: xiao_ble//zmk
-    shield: kod_04_right
+    shield: kod_05_right

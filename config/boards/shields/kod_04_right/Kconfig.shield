@@ -1,4 +1,0 @@
-config SHIELD_KOD_04_RIGHT
-    def_bool $(shields_list_contains,kod_04_right)
-    select INPUT
-    select ZMK_POINTING

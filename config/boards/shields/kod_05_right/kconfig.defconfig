@@ -1,24 +1,24 @@
-if SHIELD_KOD_04_LEFT
+if SHIELD_KOD_05_LEFT
 
 config ZMK_KEYBOARD_NAME
-    default "Kod-04"
+    default "Kod-05"
 
 config ZMK_SPLIT_ROLE_CENTRAL
     default n
 
 endif
 
-if SHIELD_KOD_04_RIGHT
+if SHIELD_KOD_05_RIGHT
 
 config ZMK_KEYBOARD_NAME
-    default "Kod-04"
+    default "Kod-05"
 
 config ZMK_SPLIT_ROLE_CENTRAL
     default y
 
 endif
 
-if SHIELD_KOD_04_LEFT || SHIELD_KOD_04_RIGHT
+if SHIELD_KOD_05_LEFT || SHIELD_KOD_05_RIGHT
 
 config ZMK_SPLIT
     default y

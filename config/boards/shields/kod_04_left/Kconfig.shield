@@ -1,3 +1,0 @@
-config SHIELD_KOD_04_LEFT
-    def_bool $(shields_list_contains,kod_04_left)
-
