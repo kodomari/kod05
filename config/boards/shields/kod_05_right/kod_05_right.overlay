@@ -1,57 +1,4 @@
-/*
- * Copyright (c) 2024 kodomari
- * SPDX-License-Identifier: MIT
- */
-#include "kod_05.dtsi"
-#include <zephyr/dt-bindings/pinctrl/nrf-pinctrl.h>
-
-&xiao_spi { status = "disabled"; };
-&xiao_i2c { status = "disabled"; };
-&xiao_serial { status = "disabled"; };
-
-/*
- * kod-05 アダプタ(右手用)FFC1 ピン割当 (実測確認済み 2026-08):
- *   12:ROW0=D0(P0.02)  11:ROW1=D1(P0.03)  10:ROW2=D2(P0.28)
- *    9:ROW3=D3(P0.29)   8:ROW4=D4(P0.04)
- *    7:COL0=D5(P0.05)   6:COL1=D6(P1.11)   5:COL2=D7(P1.12)
- *    4:COL3=D8(P1.13)   3:COL4=D9(P1.14)   2:COL5=D10(P1.15)
- *    1:COL6=拡張ピン P0.15
- * (右手FFCにGND/ENC_A/ENC_Bなし。ENC_A(P0.19)/ENC_B(P1.01)は未使用)
- *
- * トラックポイント(PS/2, UART bit-bangドライバ):
- *   CLK  = UART_TX = P1.03 (変更なし)
- *   DATA = P1.05 (旧 P0.31/UART_RX から変更。基板上のP0.31配線は
- *          切り飛ばし、XIAOのP1.05ピンへジャンパで直結する)
- *   理由: P0.31はXIAO内部でバッテリ電圧監視回路(PIN_VBAT)に恒久接続
- *         されており、信号線として使うと通信品質低下や充電中の耐圧
- *         超過による破損リスクがあるため使用しない。
- *
- * PD_1(P0.09)=RX1 / PD_2(P0.10)=TX1 は、ヒンジを跨ぐ左右リンク用の
- * ハードウェアUART1として確定。トラックポイントには使わない。
- * 右手はcentral側(kod_05_right.conf の CONFIG_ZMK_SPLIT_ROLE_CENTRAL=y)。
- */
-&pinctrl {
-    uart1_default: uart1_default {
-        group1 {
-            psels = <NRF_PSEL(UART_TX, 0, 10)>,
-                    <NRF_PSEL(UART_RX, 0, 9)>;
-        };
-    };
-
-    uart1_sleep: uart1_sleep {
-        group1 {
-            psels = <NRF_PSEL(UART_TX, 0, 10)>,
-                    <NRF_PSEL(UART_RX, 0, 9)>;
-            low-power-enable;
-        };
-    };
-
-    uart0_ps2_default: uart0_ps2_default {
-        group1 {
-            psels = <
-                NRF_PSEL(UART_TX, 0, 30)   /* unused TX (unexposed) */
-                NRF_PSEL(UART_RX, 1, 5)    /* DATA = P1.05 */
-            >;
+         >;
         };
     };
 
@@ -66,14 +13,15 @@
     };
 };
 
-&uart1 {
-    compatible = "nordic,nrf-uarte";
-    status = "okay";
-    current-speed = <115200>;
-    pinctrl-0 = <&uart1_default>;
-    pinctrl-1 = <&uart1_sleep>;
-    pinctrl-names = "default", "sleep";
-};
+/*&uart1 {
+ *    compatible = "nordic,nrf-uarte";
+ *    status = "okay";
+ *    current-speed = <115200>;
+ *    pinctrl-0 = <&uart1_default>;
+ *    pinctrl-1 = <&uart1_sleep>;
+ *    pinctrl-names = "default", "sleep";
+ *};
+ */
 
 &uart0 {
     compatible = "nordic,nrf-uarte";
@@ -92,11 +40,11 @@
 };
 
 / {
-    wired_split: wired_split {
-        compatible = "zmk,wired-split";
-        device = <&uart1>;
-    };
-
+/*    wired_split: wired_split {
+ *        compatible = "zmk,wired-split";
+ *        device = <&uart1>;
+ *    };
+ */
     mouse_ps2: mouse_ps2 {
         compatible = "zmk,input-mouse-ps2";
         status = "okay";
