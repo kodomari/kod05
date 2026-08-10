@@ -62,30 +62,30 @@
         wakeup-source;
         diode-direction = "col2row";
 
-        row-gpios
-          = <&xiao_d 0  (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
-          , <&xiao_d 1  (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
-          , <&xiao_d 2  (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
-          , <&xiao_d 3  (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
-          , <&xiao_d 4  (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
+row-gpios
+          = <&xiao_d 0  (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>   /* ROW0 = adapter pad15 */
+          , <&gpio0 15  (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>   /* ROW1 = adapter pad14 = P0.15 */
+          , <&xiao_d 1  (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>   /* ROW2 = adapter pad13 */
+          , <&gpio0 19  (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>   /* ROW3 = adapter pad12 = P0.19 */
+          , <&xiao_d 2  (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>   /* ROW4 = adapter pad11 */
           ;
 
         col-gpios
-          = <&xiao_d 5  GPIO_ACTIVE_HIGH>
-          , <&xiao_d 6  GPIO_ACTIVE_HIGH>
-          , <&xiao_d 7  GPIO_ACTIVE_HIGH>
-          , <&xiao_d 8  GPIO_ACTIVE_HIGH>
-          , <&xiao_d 9  GPIO_ACTIVE_HIGH>
-          , <&xiao_d 10 GPIO_ACTIVE_HIGH>
-          , <&gpio0 15  GPIO_ACTIVE_HIGH>
+          = <&gpio1 1   GPIO_ACTIVE_HIGH>   /* COL0 = adapter pad10 = P1.01 */
+          , <&xiao_d 3  GPIO_ACTIVE_HIGH>   /* COL1 = adapter pad9 */
+          , <&xiao_d 4  GPIO_ACTIVE_HIGH>   /* COL2 = adapter pad8 */
+          , <&xiao_d 5  GPIO_ACTIVE_HIGH>   /* COL3 = adapter pad7 */
+          , <&xiao_d 6  GPIO_ACTIVE_HIGH>   /* COL4 = adapter pad6 */
+          , <&xiao_d 7  GPIO_ACTIVE_HIGH>   /* COL5 = adapter pad5 */
+          , <&xiao_d 8  GPIO_ACTIVE_HIGH>   /* COL6 = adapter pad4 */
           ;
     };
 };
 
 &left_encoder {
     status = "okay";
-    a-gpios = <&gpio0 19 (GPIO_ACTIVE_HIGH | GPIO_PULL_UP)>;
-    b-gpios = <&gpio1 1  (GPIO_ACTIVE_HIGH | GPIO_PULL_UP)>;
+    a-gpios = <&xiao_d 9  (GPIO_ACTIVE_HIGH | GPIO_PULL_UP)>;
+    b-gpios = <&xiao_d 10 (GPIO_ACTIVE_HIGH | GPIO_PULL_UP)>;
 };
 
 &default_transform {
