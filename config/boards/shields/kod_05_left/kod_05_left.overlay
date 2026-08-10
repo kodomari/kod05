@@ -89,5 +89,6 @@
 };
 
 &default_transform {
-    col-offset = <0>;
+    /* peripheral(左手)側。centralの列数(7)ぶんオフセットする */
+    col-offset = <7>;
 };
