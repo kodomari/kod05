@@ -77,7 +77,10 @@
 
 &uart0 {
     compatible = "nordic,nrf-uarte";
+/*
     status = "okay";
+*/
+    status = "disabled"; /* トラックポイント未接続のため一時無効化(マトリクスの切り分け中) */
     current-speed = <14400>;
     pinctrl-0 = <&uart0_ps2_default>;
     pinctrl-1 = <&uart0_ps2_sleep>;
@@ -85,7 +88,10 @@
 
     uart_ps2: uart_ps2 {
         compatible = "uart-ps2";
-        status = "okay";
+/*
+    status = "okay";
+*/
+    status = "disabled"; /* トラックポイント未接続のため一時無効化 */
         scl-gpios = <&gpio1 3 GPIO_OPEN_DRAIN>; /* CLK  = UART_TX = P1.03 */
         sda-gpios = <&gpio1 5 GPIO_OPEN_DRAIN>; /* DATA = P1.05 (ジャンパ) */
     };
@@ -99,7 +105,10 @@
 
     mouse_ps2: mouse_ps2 {
         compatible = "zmk,input-mouse-ps2";
+/*
         status = "okay";
+*/
+        status = "disabled"; /* トラックポイント未接続のため一時無効化 */
         ps2-device = <&uart_ps2>;
 
         /* リセット回路が無い場合のみ有効化。今回は配線未確認のため無効のまま。
