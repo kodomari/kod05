@@ -30,21 +30,21 @@
   keymap {
     compatible = "zmk,keymap";
 
-    // col-offset方式: 各行、右手7列(central, offset0)→左手7列(peripheral, offset7)の順。
-    // 従来の「左手35キー block→右手35キー block」の並びから、行単位の交互配置に変更。
+    // 実測した物理row/col対応表(右手が画像の「右」表、左手が「左」表)に基づく。
+    // 1行 = グローバル14列 = [右手 col-offset0 の7列][左手 col-offset7 の7列]。
     default_layer {
     sensor-bindings = <&scroll_encoder>;
       bindings = <
-        // row0: 右7 + 左7
-        &kp G     &kp N7    &kp N8    &kp N9    &kp N0    &kp MINUS &kp EQUAL &kp ESC   &kp N1    &kp N2    &kp N3    &kp N4    &kp N5    &kp RET
-        // row1
-        &kp Y     &kp U     &kp I     &kp O     &kp P     &kp LBKT  &kp RBKT  &kp TAB   &kp Q     &kp W     &kp E     &kp R     &kp T     &kp DOWN
-        // row2
+        // row0: 右(7 8 9 0 - = Y) + 左(ESC 1 2 3 4 5 6)
+        &kp N7    &kp N8    &kp N9    &kp N0    &kp MINUS &kp EQUAL &kp Y     &kp ESC   &kp N1    &kp N2    &kp N3    &kp N4    &kp N5    &kp N6
+        // row1: 右(U I O P [ ] G) + 左(TAB Q W E R T DOWN)
+        &kp U     &kp I     &kp O     &kp P     &kp LBKT  &kp RBKT  &kp G     &kp TAB   &kp Q     &kp W     &kp E     &kp R     &kp T     &kp DOWN
+        // row2: 右(H J K L ; ' ENTER) + 左(CTRL A S D F G LEFT)
         &kp H     &kp J     &kp K     &kp L     &kp SEMI  &kp APOS  &kp RET   &kp LCTRL &kp A     &kp S     &kp D     &kp F     &kp G     &kp LEFT
-        // row3
+        // row3: 右(B N M , . / SHIFT) + 左(SHIFT Z X C V B RIGHT)
         &kp B     &kp N     &kp M     &kp COMMA &kp DOT   &kp FSLH  &kp RSHFT &kp LSHFT &kp Z     &kp X     &kp C     &kp V     &kp B     &kp RIGHT
-        // row4
-        &mkp LCLK &mkp MCLK &mkp RCLK &kp SPACE &kp BSLH  &kp PSCRN &kp BSPC  &mo 1     &kp LGUI  &kp LALT  &kp SPACE &kp DEL   &kp N6    &kp UP
+        // row4: 右(BS SPACE BACKSLASH PRTSCRN - - -) + 左(mo1 GUI ALT SPACE DEL wheel-click UP)
+        &kp BSPC  &kp SPACE &kp BSLH  &kp PSCRN &mkp LCLK &mkp MCLK &mkp RCLK &mo 1     &kp LGUI  &kp LALT  &kp SPACE &kp DEL   &mkp MCLK &kp UP
       >;
     };
 
@@ -52,7 +52,7 @@
       sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN>;
       bindings = <
         // row0
-        &trans    &kp F7    &kp F8    &kp F9    &kp F10   &kp F11   &kp F12   &kp TILDE &kp F1    &kp F2    &kp F3    &kp F4    &kp F5    &trans
+        &kp F7    &kp F8    &kp F9    &kp F10   &kp F11   &kp F12   &trans    &kp TILDE &kp F1    &kp F2    &kp F3    &kp F4    &kp F5    &trans
         // row1
         &trans    &trans    &trans    &trans    &trans    &trans    &trans    &bt BT_CLR    &bt BT_SEL 0    &bt BT_SEL 1    &bt BT_SEL 2    &bt BT_SEL 3    &bt BT_SEL 4    &trans
         // row2
@@ -68,8 +68,8 @@
 
         combo_right_boot {
             timeout-ms = <50>;
-            /* 旧: <41 68> = 右手のEQUAL・PSCRN。新配置での同じ2キーのポジション番号に更新 */
-            key-positions = <6 61>;
+            /* 右手のEQUAL(row0,col5=位置5)とPRTSCRN(row4,col3=位置59) */
+            key-positions = <5 59>;
             bindings = <&bootloader>;
         };
     };
