@@ -29,42 +29,38 @@
     };
   keymap {
     compatible = "zmk,keymap";
-    
+
+    // col-offset方式: 各行、右手7列(central, offset0)→左手7列(peripheral, offset7)の順。
+    // 従来の「左手35キー block→右手35キー block」の並びから、行単位の交互配置に変更。
     default_layer {
     sensor-bindings = <&scroll_encoder>;
       bindings = <
-        // 左手35キー
-        &kp ESC   &kp N1    &kp N2    &kp N3    &kp N4    &kp N5    &kp RET
-        &kp TAB   &kp Q     &kp W     &kp E     &kp R     &kp T     &kp DOWN
-        &kp LCTRL &kp A     &kp S     &kp D     &kp F     &kp G     &kp LEFT
-        &kp LSHFT &kp Z     &kp X     &kp C     &kp V     &kp B     &kp RIGHT
-        &mo 1     &kp LGUI  &kp LALT  &kp SPACE &kp DEL   &kp N6    &kp UP
-        
-        // 右手35キー
-        &kp G     &kp N7    &kp N8    &kp N9    &kp N0    &kp MINUS &kp EQUAL
-        &kp Y     &kp U     &kp I     &kp O     &kp P     &kp LBKT  &kp RBKT
-        &kp H     &kp J     &kp K     &kp L     &kp SEMI  &kp APOS  &kp RET
-        &kp B     &kp N     &kp M     &kp COMMA &kp DOT   &kp FSLH  &kp RSHFT
-        &mkp LCLK &mkp MCLK &mkp RCLK &kp SPACE &kp BSLH  &kp PSCRN &kp BSPC
+        // row0: 右7 + 左7
+        &kp G     &kp N7    &kp N8    &kp N9    &kp N0    &kp MINUS &kp EQUAL &kp ESC   &kp N1    &kp N2    &kp N3    &kp N4    &kp N5    &kp RET
+        // row1
+        &kp Y     &kp U     &kp I     &kp O     &kp P     &kp LBKT  &kp RBKT  &kp TAB   &kp Q     &kp W     &kp E     &kp R     &kp T     &kp DOWN
+        // row2
+        &kp H     &kp J     &kp K     &kp L     &kp SEMI  &kp APOS  &kp RET   &kp LCTRL &kp A     &kp S     &kp D     &kp F     &kp G     &kp LEFT
+        // row3
+        &kp B     &kp N     &kp M     &kp COMMA &kp DOT   &kp FSLH  &kp RSHFT &kp LSHFT &kp Z     &kp X     &kp C     &kp V     &kp B     &kp RIGHT
+        // row4
+        &mkp LCLK &mkp MCLK &mkp RCLK &kp SPACE &kp BSLH  &kp PSCRN &kp BSPC  &mo 1     &kp LGUI  &kp LALT  &kp SPACE &kp DEL   &kp N6    &kp UP
       >;
     };
-    
+
     function_layer {
       sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN>;
       bindings = <
-        // 左手35キー
-        &kp TILDE &kp F1    &kp F2    &kp F3    &kp F4    &kp F5    &trans
-        &bt BT_CLR    &bt BT_SEL 0    &bt BT_SEL 1    &bt BT_SEL 2    &bt BT_SEL 3    &bt BT_SEL 4    &trans
-        &trans    &trans    &trans    &trans    &trans    &trans    &trans
-        &trans    &trans    &trans    &trans    &trans    &trans    &trans
-        &trans    &trans    &trans    &trans    &trans    &kp F6    &trans
-        
-        // 右手35キー
-        &trans    &kp F7    &kp F8    &kp F9    &kp F10   &kp F11   &kp F12
-        &trans    &trans    &trans    &trans    &trans    &trans    &trans
-        &trans    &trans    &trans    &trans    &trans    &trans    &trans
-        &trans    &trans    &trans    &trans    &trans    &trans    &trans
-        &trans    &trans    &trans    &trans    &trans    &trans    &trans
+        // row0
+        &trans    &kp F7    &kp F8    &kp F9    &kp F10   &kp F11   &kp F12   &kp TILDE &kp F1    &kp F2    &kp F3    &kp F4    &kp F5    &trans
+        // row1
+        &trans    &trans    &trans    &trans    &trans    &trans    &trans    &bt BT_CLR    &bt BT_SEL 0    &bt BT_SEL 1    &bt BT_SEL 2    &bt BT_SEL 3    &bt BT_SEL 4    &trans
+        // row2
+        &trans    &trans    &trans    &trans    &trans    &trans    &trans    &trans    &trans    &trans    &trans    &trans    &trans    &trans
+        // row3
+        &trans    &trans    &trans    &trans    &trans    &trans    &trans    &trans    &trans    &trans    &trans    &trans    &trans    &trans
+        // row4
+        &trans    &trans    &trans    &trans    &trans    &trans    &trans    &trans    &trans    &trans    &trans    &trans    &kp F6    &trans
       >;
     };
     combos {
@@ -72,7 +68,8 @@
 
         combo_right_boot {
             timeout-ms = <50>;
-            key-positions = <41 68>;
+            /* 旧: <41 68> = 右手のEQUAL・PSCRN。新配置での同じ2キーのポジション番号に更新 */
+            key-positions = <6 61>;
             bindings = <&bootloader>;
         };
     };
