@@ -38,13 +38,13 @@
         // row0: 右(7 8 9 0 - = Y) + 左(ESC 1 2 3 4 5 6)
         &kp N7    &kp N8    &kp N9    &kp N0    &kp MINUS &kp EQUAL &kp Y     &kp ESC   &kp N1    &kp N2    &kp N3    &kp N4    &kp N5    &kp N6
         // row1: 右(U I O P [ ] G) + 左(TAB Q W E R T DOWN)
-        &kp U     &kp I     &kp O     &kp P     &kp LBKT  &kp RBKT  &kp G     &kp TAB   &kp Q     &kp W     &kp E     &kp R     &kp T     &kp DOWN
+        &kp U     &kp I     &kp O     &kp P     &kp LBKT  &kp RBKT  &kp G     &kp TAB   &kp Q     &kp W     &kp E     &kp R     &kp T     &kp LEFT
         // row2: 右(H J K L ; ' ENTER) + 左(CTRL A S D F G LEFT)
-        &kp H     &kp J     &kp K     &kp L     &kp SEMI  &kp APOS  &kp RET   &kp LCTRL &kp A     &kp S     &kp D     &kp F     &kp G     &kp LEFT
+        &kp H     &kp J     &kp K     &kp L     &kp SEMI  &kp APOS  &kp RET   &kp LCTRL &kp A     &kp S     &kp D     &kp F     &kp G     &kp UP
         // row3: 右(B N M , . / SHIFT) + 左(SHIFT Z X C V B RIGHT)
         &kp B     &kp N     &kp M     &kp COMMA &kp DOT   &kp FSLH  &kp RSHFT &kp LSHFT &kp Z     &kp X     &kp C     &kp V     &kp B     &kp RIGHT
         // row4: 右(BS SPACE BACKSLASH PRTSCRN - - -) + 左(mo1 GUI ALT SPACE DEL wheel-click UP)
-        &kp BSPC  &kp SPACE &kp BSLH  &kp PSCRN &mkp LCLK &mkp MCLK &mkp RCLK &mo 1     &kp LGUI  &kp LALT  &kp SPACE &kp DEL   &mkp MCLK &kp UP
+        &kp BSPC  &kp SPACE &kp BSLH  &kp PSCRN &mkp LCLK &mkp MCLK &mkp RCLK &mo 1     &kp LGUI  &kp LALT  &kp SPACE &kp DEL   &mkp MCLK &kp DOWN
       >;
     };
 
