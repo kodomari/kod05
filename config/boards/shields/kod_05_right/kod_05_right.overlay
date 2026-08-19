@@ -77,10 +77,7 @@
 
 &uart0 {
     compatible = "nordic,nrf-uarte";
-/*
     status = "okay";
-*/
-    status = "disabled"; /* トラックポイント未接続のため一時無効化(マトリクスの切り分け中) */
     current-speed = <14400>;
     pinctrl-0 = <&uart0_ps2_default>;
     pinctrl-1 = <&uart0_ps2_sleep>;
@@ -88,10 +85,7 @@
 
     uart_ps2: uart_ps2 {
         compatible = "uart-ps2";
-/*
-    status = "okay";
-*/
-    status = "disabled"; /* トラックポイント未接続のため一時無効化 */
+        status = "okay";
         scl-gpios = <&gpio1 3 GPIO_OPEN_DRAIN>; /* CLK  = UART_TX = P1.03 */
         sda-gpios = <&gpio1 5 GPIO_OPEN_DRAIN>; /* DATA = P1.05 (ジャンパ) */
     };
@@ -105,16 +99,13 @@
 
     mouse_ps2: mouse_ps2 {
         compatible = "zmk,input-mouse-ps2";
-/*
         status = "okay";
-*/
-        status = "disabled"; /* トラックポイント未接続のため一時無効化 */
         ps2-device = <&uart_ps2>;
 
-        /* リセット回路が無い場合のみ有効化。今回は配線未確認のため無効のまま。
-         * rst-gpiosを使う場合は、PD_1/PD_2は左右リンク用UART1で使用済みなので
-         * 別途空きピンを確保すること。
+        /* 実機のトラックポイントユニットがハードウェアリセット線を持っていたため
+         * 有効化。D9/D10は右手では未使用(エンコーダは左手のみ)なのでD9を使う。
          */
+        rst-gpios = <&xiao_d 9 GPIO_ACTIVE_LOW>;
 
         tp-sensitivity = <100>;
     };
@@ -133,7 +124,7 @@
         wakeup-source;
         diode-direction = "col2row";
 
-    row-gpios
+        row-gpios
           = <&xiao_d 0  (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>   /* ROW0 = adapter pad15 */
           , <&gpio0 15  (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>   /* ROW1 = adapter pad14 = P0.15 */
           , <&xiao_d 1  (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>   /* ROW2 = adapter pad13 */
@@ -150,7 +141,7 @@
           , <&xiao_d 7  GPIO_ACTIVE_HIGH>   /* COL5 = adapter pad5 */
           , <&xiao_d 8  GPIO_ACTIVE_HIGH>   /* COL6 = adapter pad4 */
           ;
-     };
+    };
 };
 
 &msc_input_listener {
